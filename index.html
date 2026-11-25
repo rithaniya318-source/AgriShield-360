@@ -1,0 +1,283 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AgriShield 360° | Smart Farming Platform</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header class="navbar">
+  <a class="logo" href="#home">🌱 AgriShield <span>360°</span></a>
+  <nav>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#doctor">Farm Doctor</a>
+    <a href="#fertilizer">Fertilizers</a>
+    <a href="#compost">Compost</a>
+    <a href="#community">Farmers</a>
+  </nav>
+  <button class="language-btn" onclick="toggleLanguage()">தமிழ் / EN</button>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="eyebrow">SMART AGRICULTURE • RURAL CONNECT</span>
+      <h1>Grow Smarter.<br><span>Farm Better.</span></h1>
+      <p>One digital platform to monitor your farm, understand crop conditions, get agricultural guidance, manage fertilizers and connect with fellow farmers.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#dashboard">Explore Farm Dashboard</a>
+        <a class="btn secondary" href="#community">Connect with Farmers</a>
+      </div>
+      <div class="hero-points">
+        <span>✓ Crop monitoring</span>
+        <span>✓ Farm guidance</span>
+        <span>✓ Sustainable farming</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-emoji">🌾</div>
+      <h3>AgriShield 360°</h3>
+      <p>Predict • Prevent • Protect • Prosper</p>
+      <div class="mini-stats">
+        <div><strong>360°</strong><small>Farm support</small></div>
+        <div><strong>24/7</strong><small>Digital access</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="dashboard">
+    <div class="section-heading">
+      <span class="eyebrow">01 / FARM MONITORING</span>
+      <h2>Smart Farm Dashboard</h2>
+      <p>Enter your farm readings to receive a basic condition assessment and practical suggestions.</p>
+    </div>
+
+    <div class="notice">Prototype mode: enter readings manually. Live sensor and weather data are not connected yet.</div>
+
+    <div class="dashboard-grid">
+      <div class="panel readings-panel">
+        <h3>🌿 Farm readings</h3>
+        <label for="crop">Crop type</label>
+        <select id="crop">
+          <option value="Paddy">Paddy</option>
+          <option value="Tomato">Tomato</option>
+          <option value="Onion">Onion</option>
+          <option value="Coconut">Coconut</option>
+          <option value="Maize">Maize</option>
+          <option value="Other">Other crop</option>
+        </select>
+
+        <label for="moisture">Soil moisture (%)</label>
+        <input id="moisture" type="number" min="0" max="100" value="35">
+        <small>Example: 35 means the sensor reports 35% moisture.</small>
+
+        <label for="temperature">Temperature (°C)</label>
+        <input id="temperature" type="number" min="-10" max="60" value="31">
+
+        <label for="rainfall">Recent rainfall (mm)</label>
+        <input id="rainfall" type="number" min="0" max="1000" value="12">
+        <small>Enter rainfall recorded over the period you are monitoring.</small>
+
+        <button class="btn primary full" onclick="analyzeFarm()">Analyse Farm Conditions</button>
+      </div>
+
+      <div class="panel result-panel">
+        <h3>📊 Farm condition report</h3>
+        <div class="metric-grid">
+          <div class="metric"><span>Soil moisture</span><strong id="moistureMetric">35%</strong></div>
+          <div class="metric"><span>Temperature</span><strong id="temperatureMetric">31°C</strong></div>
+          <div class="metric"><span>Rainfall</span><strong id="rainfallMetric">12 mm</strong></div>
+          <div class="metric"><span>Overall status</span><strong id="statusMetric">Waiting</strong></div>
+        </div>
+        <div id="farmResult" class="result-box">
+          Enter your readings and select Analyse Farm Conditions to see your report.
+        </div>
+        <div class="risk-track"><div id="riskBar"></div></div>
+        <p class="muted" id="riskLabel">Farm risk indicator: not calculated</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alternate" id="doctor">
+    <div class="section-heading">
+      <span class="eyebrow">02 / EXPERT SUPPORT</span>
+      <h2>Connect with a Farm Doctor</h2>
+      <p>Describe a crop issue and prepare a consultation request for an agricultural expert.</p>
+    </div>
+    <div class="two-column">
+      <div class="panel">
+        <h3>🩺 Ask an agricultural expert</h3>
+        <form id="doctorForm">
+          <label for="farmerName">Your name</label>
+          <input id="farmerName" required placeholder="Enter your name">
+          <label for="doctorCrop">Crop name</label>
+          <input id="doctorCrop" required placeholder="Example: Tomato">
+          <label for="problem">What problem are you facing?</label>
+          <select id="problem">
+            <option>Yellow leaves</option>
+            <option>Leaf spots or disease symptoms</option>
+            <option>Slow plant growth</option>
+            <option>Insect or pest attack</option>
+            <option>Water or soil problem</option>
+            <option>Other</option>
+          </select>
+          <label for="doctorQuestion">Describe your question</label>
+          <textarea id="doctorQuestion" rows="4" required placeholder="Explain what you observed..."></textarea>
+          <button class="btn primary full" type="submit">Prepare Consultation Request</button>
+        </form>
+        <div id="doctorResult" class="result-box hidden"></div>
+      </div>
+      <div class="info-card">
+        <div class="large-icon">👩‍🌾</div>
+        <h3>Get guidance before taking action</h3>
+        <p>A qualified agricultural expert can help assess symptoms, soil conditions, pest issues and crop-management questions.</p>
+        <ul>
+          <li>Describe when the problem started.</li>
+          <li>Share clear photos of affected leaves or plants.</li>
+          <li>Mention your crop age and recent treatments.</li>
+          <li>Ask before applying unfamiliar chemicals.</li>
+        </ul>
+        <p class="notice">This prototype prepares a request only. It does not yet send it to a real doctor or agricultural officer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="fertilizer">
+    <div class="section-heading">
+      <span class="eyebrow">03 / SOIL NUTRITION</span>
+      <h2>Fertilizer & Soil Assistant</h2>
+      <p>Understand what your soil may need before choosing a fertilizer.</p>
+    </div>
+    <div class="two-column">
+      <div class="panel">
+        <h3>🧪 Soil information</h3>
+        <label for="soilType">Soil type</label>
+        <select id="soilType">
+          <option value="Clay">Clay soil</option>
+          <option value="Sandy">Sandy soil</option>
+          <option value="Loamy">Loamy soil</option>
+          <option value="Unknown">Not sure</option>
+        </select>
+        <label for="soilPh">Soil pH (if tested)</label>
+        <input id="soilPh" type="number" min="0" max="14" step="0.1" placeholder="Example: 6.5">
+        <label for="soilConcern">Main concern</label>
+        <select id="soilConcern">
+          <option value="growth">Poor plant growth</option>
+          <option value="yellow">Yellowing leaves</option>
+          <option value="soil">Low soil fertility</option>
+          <option value="general">General soil improvement</option>
+        </select>
+        <button class="btn primary full" onclick="getSoilAdvice()">Get Soil Guidance</button>
+        <div id="soilAdvice" class="result-box">Your guidance will appear here.</div>
+      </div>
+      <div class="info-card">
+        <div class="large-icon">🌱</div>
+        <h3>Why soil testing matters</h3>
+        <p>Soil tests can measure pH and nutrient levels such as nitrogen, phosphorus and potassium (NPK).</p>
+        <ul>
+          <li>Nitrogen supports leafy growth.</li>
+          <li>Phosphorus supports root development.</li>
+          <li>Potassium supports overall plant health.</li>
+          <li>Organic matter improves soil structure.</li>
+        </ul>
+        <p class="notice">Do not select a fertilizer dose based only on leaf colour or this demo. Use a soil-test report and local agricultural expert advice.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alternate" id="compost">
+    <div class="section-heading">
+      <span class="eyebrow">04 / WASTE TO WEALTH</span>
+      <h2>Turn Farm Waste into Fertility</h2>
+      <p>Some everyday organic leftovers can become useful compost when managed properly.</p>
+    </div>
+    <div class="compost-grid">
+      <article class="compost-card">
+        <div class="compost-icon">🧅</div>
+        <h3>Onion peels</h3>
+        <p>Add small amounts to a compost pile. Mix with dry leaves and other organic material. Compost fully before applying.</p>
+      </article>
+      <article class="compost-card">
+        <div class="compost-icon">🥕</div>
+        <h3>Vegetable scraps</h3>
+        <p>Fruit and vegetable scraps can be composted. Chop them into smaller pieces and cover with dry material.</p>
+      </article>
+      <article class="compost-card">
+        <div class="compost-icon">🍂</div>
+        <h3>Dry leaves</h3>
+        <p>Dry leaves provide carbon-rich material. Mix them with moist green waste to balance the compost pile.</p>
+      </article>
+      <article class="compost-card">
+        <div class="compost-icon">🌾</div>
+        <h3>Crop residues</h3>
+        <p>Healthy crop residues can be composted or mulched where appropriate. Avoid spreading diseased plant material.</p>
+      </article>
+    </div>
+    <div class="notice">Composting tip: keep the pile moist but not waterlogged, allow air circulation, and let it decompose fully. Avoid meat, dairy, oily food and chemically contaminated waste. Do not place fresh scraps directly around plant stems.</div>
+  </section>
+
+  <section class="section" id="community">
+    <div class="section-heading">
+      <span class="eyebrow">05 / RURAL CONNECT</span>
+      <h2>Connect with Nearby Farmers</h2>
+      <p>Share knowledge, ask questions and explore equipment-sharing opportunities.</p>
+    </div>
+    <div class="community-grid">
+      <div class="panel">
+        <h3>🤝 Farmer community</h3>
+        <div class="farmer-card">
+          <div class="avatar">RK</div>
+          <div><strong>Ravi Kumar</strong><p>Coimbatore · Paddy farmer</p></div>
+          <button class="small-btn" onclick="openChat('Ravi Kumar')">Chat</button>
+        </div>
+        <div class="farmer-card">
+          <div class="avatar">M</div>
+          <div><strong>Meena</strong><p>Tiruppur · Vegetable grower</p></div>
+          <button class="small-btn" onclick="openChat('Meena')">Chat</button>
+        </div>
+        <div class="farmer-card">
+          <div class="avatar">A</div>
+          <div><strong>Arun</strong><p>Erode · Coconut farmer</p></div>
+          <button class="small-btn" onclick="openChat('Arun')">Chat</button>
+        </div>
+        <p class="muted">Sample profiles for demonstration only. They are not verified real contacts.</p>
+      </div>
+
+      <div class="panel">
+        <h3>💬 Community chat demo</h3>
+        <div class="chat-window" id="chatWindow">
+          <div class="chat-message received">Welcome to AgriShield Farmer Connect! Select a sample farmer to start a demo conversation.</div>
+        </div>
+        <div class="chat-compose">
+          <input id="chatInput" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendMessage()">
+          <button class="btn primary" onclick="sendMessage()">Send</button>
+        </div>
+        <p class="muted">Messages stay in this browser demo; they are not delivered to other people.</p>
+      </div>
+    </div>
+
+    <div class="panel equipment-panel">
+      <h3>🚜 Equipment sharing board</h3>
+      <p>Farmers can coordinate sharing equipment such as tractors, tillers, sprayers and water pumps.</p>
+      <div class="equipment-tags">
+        <span>🚜 Tractor</span><span>💧 Water pump</span><span>🌱 Seed drill</span><span>🛠️ Tiller</span>
+      </div>
+      <p class="muted">Future module: verified listings, availability calendar and direct booking.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="logo">🌱 AgriShield 360°</div>
+  <p>Predict. Prevent. Protect. Prosper.</p>
+  <small>Student prototype · Smart agriculture and rural support</small>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
